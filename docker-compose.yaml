@@ -1,0 +1,16 @@
+version: "3"
+
+services:
+  news_app-db:
+    container_name: news_app-db
+    image: postgres:13
+    restart: on-failure
+    ports:
+      - 5555:5432
+    env_file:
+    - .env
+    volumes:
+      - news_app-postgres:/var/lib/postgresql/data
+
+volumes:
+  news_app-postgres:
