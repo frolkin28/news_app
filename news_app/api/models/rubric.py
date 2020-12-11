@@ -9,5 +9,10 @@ class Rubric(models.Model):
         default=uuid.uuid4,
         editable=False,
     )
-    title = models.CharField(max_length=60)
+    title = models.CharField(
+        max_length=60,
+        null=False,
+        blank=False,
+        unique=True,
+    )
     description = models.CharField(max_length=255)
