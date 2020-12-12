@@ -23,9 +23,14 @@ class LoginView(views.APIView):
 
 
 class LogoutView(views.APIView):
+    permission_classes = tuple()
+    authentication_classes = tuple()
+
     def post(self, request):
         logout(request)
-        return response.Response()
+        resp = response.Response({})
+        resp.delete_cookie('csrftoken')
+        return resp
 
 
 class RegisterView(generics.CreateAPIView):
