@@ -1,12 +1,14 @@
 import uuid
 
-from django.contrib.auth.hashers import check_password, make_password
 from django.db import models
+from django.contrib.auth.models import AbstractBaseUser
+from django.contrib.auth.models import PermissionsMixin
 
 from api.util.enums import Role
+from api.util.custom_manager import CustomUserManager
 
 
-class User(models.Model):
+class User(AbstractBaseUser, PermissionsMixin):
     uuid = models.UUIDField(
         primary_key=True,
         default=uuid.uuid4,
@@ -16,11 +18,16 @@ class User(models.Model):
     password = models.CharField(max_length=120)
     first_name = models.CharField(max_length=60)
     last_name = models.CharField(max_length=60)
-    role = models.IntegerField(choices=Role.choices(), default=Role.USER)
+    role = models.IntegerField(choices=Role.choices(), default=Role.USER.value)
 
-    @staticmethod
-    def generate_password_hash(password):
-        return make_password(password)
+    # additional fileds for Django
+    is_staff = models.BooleanField(default=False)
+    is_active = models.BooleanField(default=True)
 
-    def check_password(self, password):
-        return check_password(password, self.password)
+    USERNAME_FIELD = 'email'
+    REQUIRED_FIELDS = []
+
+    objects = CustomUserManager()
+
+    def __str__(self):
+        return self.email

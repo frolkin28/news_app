@@ -1,6 +1,8 @@
+from django.contrib.auth import authenticate
 from rest_framework import serializers
 
-from models import News, Photo, User, Tag
+from api.models import News, Photo, Tag, User
+from api.util.validators import validate_email
 
 
 class UserSerializer(serializers.ModelSerializer):
@@ -14,7 +16,22 @@ class UserSerializer(serializers.ModelSerializer):
             'last_name',
             'role',
         )
-        write_only_fields = ('password',)
+        exclude = ('is_staff', 'is_active')
+        extra_kwargs = {
+            'password': {'required': True, 'write_only': True},
+            'email': {'required': True}
+        }
+
+    @staticmethod
+    def validate_email(value):
+        return validate_email(value)
+
+    def create(self, validated_data):
+        return User.objects.create_user(
+            validated_data.pop('email'),
+            validated_data.pop('password'),
+            **validated_data
+        )
 
 
 class PhotoSerializer(serializers.ModelSerializer):
@@ -37,3 +54,22 @@ class NewsSerializer(serializers.ModelSerializer):
     class Meta:
         model = News
         fields = ('uuid', 'title', 'content', 'date_created')
+
+
+class LoginSerializer(serializers.Serializer):
+    email = serializers.EmailField()
+    password = serializers.CharField()
+
+    def validate(self, attrs):
+        user = authenticate(
+            username=attrs['email'],
+            password=attrs['password'],
+        )
+
+        if not user:
+            raise serializers.ValidationError('Incorrect email or password.')
+
+        if not user.is_active:
+            raise serializers.ValidationError('User is disabled.')
+
+        return {'user': user}
