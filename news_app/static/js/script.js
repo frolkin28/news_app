@@ -1,9 +1,11 @@
 const registerButton = document.getElementById('register');
 const loginButton = document.getElementById('login');
 const logoutButton = document.getElementById('logout');
+const testButton = document.getElementById('test');
 registerButton.addEventListener('click', register);
 loginButton.addEventListener('click', login);
 logoutButton.addEventListener('click', logout);
+testButton.addEventListener('click', test);
 
 const registerRequest = new Request(
     '/auth/register/',
@@ -85,4 +87,27 @@ function logout() {
         .then(res => {
             console.log(res);
         })
+}
+
+
+function test() {
+    const uuid = 'a233dc01-7631-4f6e-83ee-467ac13f6013';
+    const news_uuid = 'c4439cb1-ea93-40bf-b213-e09b9aa76d8fRRRR'
+
+    fetch(
+        `/api/news/${news_uuid}`,
+        {
+            method: 'GET',
+            headers: {
+                'X-CSRFToken': getCookie('csrftoken'),
+                'Content-Type': 'application/json',
+            },
+            // body: JSON.stringify({
+            //     title: 'title 1',
+            //     content: 'some content',
+            // })
+        }
+    )
+        .then(res => res.json())
+        .then(res => console.log(res))
 }

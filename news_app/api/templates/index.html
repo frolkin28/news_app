@@ -2,26 +2,32 @@
 
 <html lang="en">
 
-    <head>
-        <meta charset="utf-8">
-        <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
-        <title>News App</title>
-        <meta name="description" content="">
-        <meta name="viewport" content="width=device-width">
-    </head>
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+    <title>News App</title>
+    <meta name="description" content="">
+    <meta name="viewport" content="width=device-width">
+</head>
 
-    <body>
+<body>
 
-        <p>HTML5 Starter Template</p>
+    <p>HTML5 Starter Template</p>
 
-        <button id="register" type="button">Register</button>
+    <button id="register" type="button">Register</button>
 
-        <button id="login" type="button">Login</button> 
+    <button id="login" type="button">Login</button>
 
-        <button id="logout" type="button">Logout</button>
+    <button id="logout" type="button">Logout</button>
 
-        {% load static %}
-        <script src="{% static 'js/script.js' %}"></script>
-    </body>
+    <button id="test" type="button">Test</button>
+
+    <br><br><br><br><br>
+
+    {% load static %}
+    <script src="{% static 'js/script.js' %}"></script>
+    <!-- <img src="{% static 'img/tree.jpg' %}" alt="Hi!" /> -->
+    <!-- <img src="http://127.0.0.1:8000/static/img/tree.jpg" alt="Hi!" /> -->
+</body>
 
 </html>

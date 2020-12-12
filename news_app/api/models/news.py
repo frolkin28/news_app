@@ -25,3 +25,7 @@ class News(models.Model):
     author = models.ForeignKey(User, on_delete=models.CASCADE)
     tags = models.ManyToManyField(Tag, blank=True, related_name='news')
     rubrics = models.ManyToManyField(Rubric, blank=True, related_name='news')
+
+    class Meta:
+        verbose_name = 'News'
+        verbose_name_plural = 'News'

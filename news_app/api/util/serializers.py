@@ -46,13 +46,21 @@ class TagSerializer(serializers.ModelSerializer):
 
 
 class NewsSerializer(serializers.ModelSerializer):
-    author = UserSerializer(many=False)
-    photo = PhotoSerializer(many=False)
-    tags = TagSerializer(many=True)
+    author = UserSerializer(many=False, required=False)
+    photo = PhotoSerializer(many=False, required=False)
+    tags = TagSerializer(many=True, required=False)
 
     class Meta:
         model = News
-        fields = ('uuid', 'title', 'content', 'date_created')
+        fields = (
+            'uuid',
+            'title',
+            'content',
+            'date_created',
+            'author',
+            'photo',
+            'tags',
+        )
 
 
 class LoginSerializer(serializers.Serializer):

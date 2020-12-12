@@ -1,16 +1,19 @@
-from rest_framework import generics
+from rest_framework import views
+from rest_framework import response
 from rest_framework import permissions
 from rest_framework import authentication
+from rest_framework import status
 
 from api.util.serializers import UserSerializer
+from api.services import user_service
 
 
-class UserView(generics.RetrieveAPIView):
-    permission_classes = (permissions.IsAuthenticated,)
+class UserView(views.APIView):
+    permission_classes = (permissions.IsAuthenticatedOrReadOnly,)
     authentication_classes = (authentication.SessionAuthentication,)
 
-    serializer_class = UserSerializer
-    lookup_field = 'uuid'
-
-    def get_object(self, *args, **kwargs):
-        return self.request.user
+    def get(self, request, uuid):
+        user = user_service.get_user_by_uuid(uuid)
+        if not user:
+            return response.Response(status=status.HTTP_404_NOT_FOUND)
+        return response.Response(UserSerializer(user).data)
