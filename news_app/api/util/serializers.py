@@ -1,7 +1,7 @@
 from django.contrib.auth import authenticate
 from rest_framework import serializers
 
-from api.models import News, Photo, Tag, User
+from api.models import News, Photo, Tag, User, Rubric
 from api.util.validators import validate_email
 
 
@@ -45,10 +45,17 @@ class TagSerializer(serializers.ModelSerializer):
         fields = ('uuid', 'title')
 
 
+class RubricSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = Rubric
+        fields = ('uuid', 'title', 'description')
+
+
 class NewsSerializer(serializers.ModelSerializer):
     author = UserSerializer(many=False, required=False)
-    photo = PhotoSerializer(many=False, required=False)
+    photo = PhotoSerializer(many=False, required=False, allow_null=True)
     tags = TagSerializer(many=True, required=False)
+    rubrics = RubricSerializer(many=True, required=False)
 
     class Meta:
         model = News
@@ -60,6 +67,28 @@ class NewsSerializer(serializers.ModelSerializer):
             'author',
             'photo',
             'tags',
+            'rubrics',
+        )
+    extra_kwargs = {
+        'uuid': {'read_only': True},
+    }
+
+
+class UpdateNewsSerializer(serializers.ModelSerializer):
+    uuid = serializers.CharField(required=True)
+    photo = PhotoSerializer(many=False, required=False, allow_null=True)
+    tags = TagSerializer(many=True, required=False)
+    rubrics = RubricSerializer(many=True, required=False)
+
+    class Meta:
+        model = News
+        fields = (
+            'uuid',
+            'title',
+            'content',
+            'photo',
+            'tags',
+            'rubrics',
         )
 
 

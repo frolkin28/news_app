@@ -4,7 +4,7 @@ from rest_framework import permissions
 from rest_framework import authentication
 from rest_framework import status
 
-from api.util.serializers import NewsSerializer
+from api.util.serializers import NewsSerializer, UpdateNewsSerializer
 from api.services import news_service
 
 
@@ -35,7 +35,18 @@ class NewsView(views.APIView):
         )
 
     def put(self, request):
-        pass
+        news_serializer = UpdateNewsSerializer(data=request.data)
+        news_serializer.is_valid(raise_exception=True)
+        news_data = news_serializer.validated_data
+        result = news_service.update_news(news_data)
+        if not result:
+            return response.Response(status=status.HTTP_404_NOT_FOUND)
+
+        return response.Response(status=status.HTTP_204_NO_CONTENT)
 
     def delete(self, request, uuid):
-        pass
+        result = news_service.delete_news(uuid)
+        if not result:
+            return response.Response(status=status.HTTP_404_NOT_FOUND)
+
+        return response.Response(status=status.HTTP_204_NO_CONTENT)

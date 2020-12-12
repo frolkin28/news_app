@@ -4,7 +4,6 @@ from api.endpoints.auth import RegisterView
 from api.endpoints.auth import LoginView
 from api.endpoints.auth import LogoutView
 from api.endpoints.user import UserView
-from api.endpoints.test import TestView
 from api.endpoints.news import NewsView
 from api.views import index
 
@@ -17,7 +16,6 @@ authpatterns = [
 
 apipatterns = [
     path('user/<uuid>/', UserView.as_view(), name='user'),
-    path('test/', TestView.as_view()),
     path('news/', NewsView.as_view(), name='news'),
     path('news/<uuid>', NewsView.as_view(), name='news_by_uuid'),
 ]

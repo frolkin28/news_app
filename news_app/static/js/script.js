@@ -92,20 +92,23 @@ function logout() {
 
 function test() {
     const uuid = 'a233dc01-7631-4f6e-83ee-467ac13f6013';
-    const news_uuid = 'c4439cb1-ea93-40bf-b213-e09b9aa76d8fRRRR'
+    const news_uuid = 'c4439cb1-ea93-40bf-b213-e09b9aa76d8f'
 
     fetch(
-        `/api/news/${news_uuid}`,
+        `/api/news/`,
         {
-            method: 'GET',
+            method: 'PUT',
             headers: {
                 'X-CSRFToken': getCookie('csrftoken'),
                 'Content-Type': 'application/json',
             },
-            // body: JSON.stringify({
-            //     title: 'title 1',
-            //     content: 'some content',
-            // })
+            body: JSON.stringify({
+                "uuid": "5bb6896d-fba2-4997-95ad-590bd40b0537",
+                "title": "title 1",
+                "content": "some updated content",
+                "photo": null,
+                "tags": []
+            })
         }
     )
         .then(res => res.json())
