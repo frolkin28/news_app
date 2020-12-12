@@ -16,7 +16,6 @@ class UserSerializer(serializers.ModelSerializer):
             'last_name',
             'role',
         )
-        exclude = ('is_staff', 'is_active')
         extra_kwargs = {
             'password': {'required': True, 'write_only': True},
             'email': {'required': True}
