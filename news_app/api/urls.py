@@ -22,7 +22,7 @@ apipatterns = [
 
 
 urlpatterns = [
-    path('', index, name='index'),
+    path('index/', index, name='index'),
     path('auth/', include(authpatterns)),
     path('api/', include(apipatterns)),
 ]
