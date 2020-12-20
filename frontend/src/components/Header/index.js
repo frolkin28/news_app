@@ -8,7 +8,7 @@ class Header extends React.Component {
             <header className="header">
                 <div className="logo">
                     <h1>
-                        <NavLink to="/" exact>
+                        <NavLink to="/" exact className="logo-link" activeClassName="logo-link">
                             News<span>Application</span>
                         </NavLink>
                     </h1>
