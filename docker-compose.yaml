@@ -9,8 +9,6 @@ services:
     command: python manage.py runserver 0.0.0.0:8000
     expose:
       - 8000
-    ports:
-      - 8000:8000
     depends_on:
       - news-postgres
     env_file:
@@ -30,8 +28,6 @@ services:
       - .env
     expose:
       - 3000
-    ports: 
-      - 3000:3000
     volumes:
       - ./frontend:/code
     networks: 

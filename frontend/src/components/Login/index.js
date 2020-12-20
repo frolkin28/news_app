@@ -44,28 +44,28 @@ class Login extends React.Component {
 
     render() {
         return (
-            <div className="main-login">
-                <p className="sign" align="center">Login</p>
-                <form className="form1">
-                    <input
-                        className="un "
-                        type="text"
-                        align="center"
-                        placeholder="Email"
-                        value={this.state.email}
-                        onChange={this.handleEmailChange}
-                    />
-                    <input
-                        className="pass"
-                        type="password"
-                        align="center"
-                        placeholder="Password"
-                        value={this.state.password}
-                        onChange={this.handlePasswordChange}
-                    />
-                    <button className="submit" align="center" onClick={this.handleSubmit}>Register</button>
-                </form>
-            </div>
+                <div className="main-login">
+                    <p className="sign" align="center">Login</p>
+                    <form className="form1">
+                        <input
+                            className="un "
+                            type="text"
+                            align="center"
+                            placeholder="Email"
+                            value={this.state.email}
+                            onChange={this.handleEmailChange}
+                        />
+                        <input
+                            className="pass"
+                            type="password"
+                            align="center"
+                            placeholder="Password"
+                            value={this.state.password}
+                            onChange={this.handlePasswordChange}
+                        />
+                        <button className="submit" align="center" onClick={this.handleSubmit}>Register</button>
+                    </form>
+                </div>
         );
     }
 }

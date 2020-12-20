@@ -16,7 +16,10 @@ header {
   font-family: 'Roboto', sans-serif;
   font-weight: 100;
 }
-.logo>h1>span {
+.logo>h1>a (
+  text-decoration: none;
+)
+.logo>h1>a>span {
   color: #484848;
 }
 nav {
