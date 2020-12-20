@@ -6,13 +6,12 @@ class Footer extends React.Component {
     render() {
         return (
             <footer id="contact">
-                <div class="footer_p1">
+                <div className="footer_p1">
                     <p>
-                        Copyright 2020, Epam systems
-                        Lorem ipsum dolor sit amet consectetur, adipisicing elit
+                        Copyright 2020
                     </p>
                 </div>
-                <div class="footer_p2">
+                <div className="footer_p2">
                     <p>
                         Design and coding
                         by Volodymyr Frolkin
