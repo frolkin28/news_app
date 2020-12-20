@@ -6,7 +6,7 @@ class Header extends React.Component {
         return (
                 <header>
                     <div class="logo">
-                        <h1>Travel<span>Blog</span></h1>
+                        <h1>News<span>Application</span></h1>
                     </div>
                     <nav>
                         <div><a href="#">Sing In</a></div>

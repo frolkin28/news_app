@@ -15,7 +15,7 @@ class Footer extends React.Component {
                 <div class="footer_p2">
                     <p>
                         Design and coding
-                        by Maria
+                        by Volodymyr Frolkin
                     </p>
                 </div>
             </footer>

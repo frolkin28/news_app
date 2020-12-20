@@ -29,7 +29,7 @@ class LogoutView(views.APIView):
     def post(self, request):
         logout(request)
         resp = response.Response({})
-        resp.delete_cookie('csrftoken')
+        resp.delete_cookie('csrftoken', samesite='lax')
         return resp
 
 
