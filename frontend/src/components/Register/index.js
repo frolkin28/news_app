@@ -4,7 +4,7 @@ import UserContext from '../../util/context';
 import './styles.css';
 
 class Register extends React.Component {
-    static contextType = UserContext
+    static contextType = UserContext;
 
     constructor(props) {
         super(props);
@@ -60,9 +60,8 @@ class Register extends React.Component {
     }
 
     handleSubmit(event) {
-        const { setUser } = this.context;
-
         event.preventDefault();
+        const { setUser } = this.context;
         let ok;
         const notEmpty = (
             (this.state.email !== "") &&
@@ -97,12 +96,12 @@ class Register extends React.Component {
                     else {
                         ok = true;
                     }
-                    return res.json()
+                    return res.json();
                 })
                 .then(data => {
                     if (ok) {
                         setUser(data);
-                    }   
+                    }
                     else {
                         let message = '';
                         for (let key in data) {
