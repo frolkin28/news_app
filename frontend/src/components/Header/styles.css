@@ -34,6 +34,7 @@ nav>div {
   display: flex;
   justify-content: center;
   align-items: center;
+  padding: 0px 5px;
 }
 nav>div>a {
   margin: 15px;
@@ -46,4 +47,19 @@ nav>div:hover {
   opacity: 0.5;
 }
  
+.user-name {
+  cursor: pointer;
+  margin: 0px 15px;
+  color: #ffffff;
+  font-size: 25px;
+  padding: 0px 5px;
+}
 
+
+.logout {
+  cursor: pointer;
+  margin: 0px 15px;
+  color: #ffffff;
+  font-size: 25px;
+  padding: 0px 5px;
+}

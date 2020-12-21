@@ -26,7 +26,12 @@ class App extends React.Component {
 
     setUser = (user) => {
         this.setState((prevState) => {
-            localStorage.setItem(authUserKey, JSON.stringify(user));
+            if (user === null) {
+                localStorage.removeItem(authUserKey);
+            }
+            else {
+                localStorage.setItem(authUserKey, JSON.stringify(user));
+            }
             return { user };
         })
     }

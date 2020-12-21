@@ -60,7 +60,7 @@ class Register extends React.Component {
     }
 
     handleSubmit(event) {
-        const { setUser } = this.context
+        const { setUser } = this.context;
 
         event.preventDefault();
         let ok;
