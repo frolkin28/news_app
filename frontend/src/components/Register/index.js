@@ -1,7 +1,11 @@
 import React from 'react';
+import { Redirect } from "react-router-dom";
+import UserContext from '../../util/context';
 import './styles.css';
 
 class Register extends React.Component {
+    static contextType = UserContext
+
     constructor(props) {
         super(props);
         this.state = {
@@ -10,6 +14,7 @@ class Register extends React.Component {
             lastName: "",
             password: "",
             confirmPassword: "",
+            isRegestred: false,
         }
 
         this.handleEmailChange = this.handleEmailChange.bind(this);
@@ -50,8 +55,15 @@ class Register extends React.Component {
         );
     }
 
+    setAuthUser(data) {
+        localStorage.setItem("authUser", JSON.stringify(data));
+    }
+
     handleSubmit(event) {
+        const { setUser } = this.context
+
         event.preventDefault();
+        let ok;
         const notEmpty = (
             (this.state.email !== "") &&
             (this.state.firstName !== "") &&
@@ -61,18 +73,60 @@ class Register extends React.Component {
         );
         const equals = (this.state.password === this.state.confirmPassword);
         if (notEmpty && equals) {
-            console.log("User registered");
+            const registerRequest = new Request(
+                '/auth/register/',
+                {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json'
+                    },
+                    body: JSON.stringify({
+                        email: this.state.email,
+                        password: this.state.password,
+                        first_name: this.state.firstName,
+                        last_name: this.state.lastName,
+                    })
+                }
+            );
+
+            fetch(registerRequest)
+                .then(res => {
+                    if (res.status > 299) {
+                        ok = false;
+                    }
+                    else {
+                        ok = true;
+                    }
+                    return res.json()
+                })
+                .then(data => {
+                    if (ok) {
+                        setUser(data);
+                    }   
+                    else {
+                        let message = '';
+                        for (let key in data) {
+                            message += `\n${data[key]}`;
+                        }
+                        alert(message);
+                    }
+                });
         }
         else if (notEmpty) {
-            console.log("Not equal passwords");
+            alert("Not equal passwords");
         }
         else {
-            console.log("Invalid data");
+            alert("Invalid data");
         }
     }
 
 
     render() {
+
+        const { user } = this.context;
+
+        if (user) return <Redirect to="/" exact />
+
         return (
             <div className="main">
                 <p className="sign" align="center">Register</p>

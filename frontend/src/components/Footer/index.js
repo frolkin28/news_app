@@ -5,7 +5,7 @@ import './styles.css';
 class Footer extends React.Component {
     render() {
         return (
-            <footer class="footer">
+            <footer className="footer">
                 <div className="footer_p1">
                     <p>
                         Copyright 2020

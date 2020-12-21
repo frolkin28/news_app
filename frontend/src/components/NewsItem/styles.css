@@ -30,3 +30,8 @@
 .news-content {
     margin: 30px 12%;
 }
+
+.news-item-link {
+    text-decoration: none;
+    color: #000000;
+}
