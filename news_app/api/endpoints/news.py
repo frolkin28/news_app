@@ -38,7 +38,7 @@ class NewsView(views.APIView):
         news_serializer = UpdateNewsSerializer(data=request.data)
         news_serializer.is_valid(raise_exception=True)
         news_data = news_serializer.validated_data
-        result = news_service.update_news(news_data)
+        result = news_service.update_news(news_data, request.user)
         if not result:
             return response.Response(status=status.HTTP_404_NOT_FOUND)
 
