@@ -6,7 +6,8 @@ import Footer from '../Footer';
 import NewsArea from '../NewsArea';
 import Register from '../Register';
 import Login from '../Login';
-import NewsPage from '../NewsPage';
+import NewsPage from '../../pages/NewsPage';
+import Account from '../Account';
 
 
 const authUserKey = 'authUser';
@@ -20,7 +21,6 @@ class App extends React.Component {
 
     getAuthUser() {
         const authUser = JSON.parse(localStorage.getItem(authUserKey));
-        console.log(authUser);
         return authUser;
     }
 
@@ -51,6 +51,7 @@ class App extends React.Component {
                             <Route path="/register" component={Register} />
                             <Route path="/login" component={Login} />
                             <Route path="/page" component={NewsPage} />
+                            <Route path="/account" component={Account} />
                         </Switch>
                     </BrowserRouter>
                     <Footer />

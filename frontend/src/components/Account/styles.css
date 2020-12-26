@@ -1,0 +1,70 @@
+.account-page {
+    display: flex;
+    padding: 10px;
+    flex-direction: row;
+}
+
+.account-area {
+    flex: 4;
+    display: flex;
+    flex-direction: column;
+}
+
+.account-title {
+    flex: 1;
+    margin-left: 10%;
+}
+
+.account-title>h1 {
+    flex: 1;
+    color: rgb(0, 140, 255);
+}
+
+.account-data {
+    margin-left: 15%;
+    flex: 1;
+}
+
+.account-data-item {
+    margin: 25px 0px;
+}
+
+.account-recent-uploaded-news {
+    flex: 1;
+    margin-left: 10%;
+    color: rgb(0, 140, 255);
+}
+
+.create-news-button-area {
+    flex: 1;
+    display: flex;
+    align-items: center;
+    justify-content: left;
+}
+
+.create-news-button {
+    flex: 1;
+    align-self: center;
+    background: #76B3FA;
+    border-radius: 100px;
+    padding: 20px 60px;
+    color: #fff;
+    text-decoration: none;
+    font-size: 1.45em;
+    margin: 0 20px;
+  }
+  
+  .create-news-button:hover { 
+    flex: 1;
+    -webkit-animation: hover 1200ms linear 2 alternate;
+    animation: hover 1200ms linear 2 alternate;
+  }
+  
+  .create-news-button:active {
+    flex: 1;
+    -webkit-animation: active 1200ms ease 1 alternate;
+    animation: active 1200ms ease 1 alternate; 
+    background: #5F9BE0;
+  }
+
+  

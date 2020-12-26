@@ -47,7 +47,11 @@ class Header extends React.Component {
         if (user) {
             navComponent = (
                 <nav>
-                    <div className="user-name">{`${user.first_name} ${user.last_name}`}</div>
+                    <div className="user-name">
+                        <NavLink to="/account">
+                            {`${user.first_name} ${user.last_name}`}
+                        </NavLink>
+                    </div>
                     <div className="logout" onClick={this.logout}>Logout</div>
                 </nav>
             )
