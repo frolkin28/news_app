@@ -6,7 +6,7 @@ import './styles.css';
 class NewsItem extends React.Component {
     render() {
         return (
-            <NavLink to="/page" className="news-item-link" activeClassName="news-item-link">
+            <NavLink to="/news" exact className="news-item-link" activeClassName="news-item-link">
                 <div className="news-item">
                     <div className="news-image">
                         <img src="/django-static/img/tree.jpg" alt="альтернативный текст"></img>

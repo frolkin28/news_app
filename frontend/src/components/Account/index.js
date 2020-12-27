@@ -10,7 +10,7 @@ class Account extends React.Component {
     render() {
         const { user } = this.context;
 
-        if (!user) return <Redirect to="/" exact />
+        if (!user) return <Redirect to="/login" />
 
         return (
             <div className="account-page">
@@ -34,7 +34,7 @@ class Account extends React.Component {
                     </div>
                 </div>
                 <div className="create-news-button-area">
-                    <NavLink to="/account" className="create-news-button">Create news</NavLink>
+                    <NavLink to="/news/create" className="create-news-button">Create news</NavLink>
                 </div>
             </div>
         )

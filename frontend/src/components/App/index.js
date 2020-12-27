@@ -7,6 +7,7 @@ import NewsArea from '../NewsArea';
 import Register from '../Register';
 import Login from '../Login';
 import NewsPage from '../../pages/NewsPage';
+import CreateNewsPage from '../../pages/CreateNewsPage';
 import Account from '../Account';
 
 
@@ -40,7 +41,6 @@ class App extends React.Component {
         const { user } = this.state;
         const { setUser } = this;
     
-
         return (
             <UserContext.Provider value={{ user, setUser }}>
                 <div className="App">
@@ -50,8 +50,9 @@ class App extends React.Component {
                             <Route path="/" exact component={NewsArea} />
                             <Route path="/register" component={Register} />
                             <Route path="/login" component={Login} />
-                            <Route path="/page" component={NewsPage} />
+                            <Route path="/news" exact component={NewsPage} />
                             <Route path="/account" component={Account} />
+                            <Route path="/news/create" component={CreateNewsPage} />
                         </Switch>
                     </BrowserRouter>
                     <Footer />

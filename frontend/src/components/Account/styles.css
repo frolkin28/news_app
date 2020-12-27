@@ -17,7 +17,7 @@
 
 .account-title>h1 {
     flex: 1;
-    color: rgb(0, 140, 255);
+    color: #8C55AA;
 }
 
 .account-data {
@@ -32,7 +32,7 @@
 .account-recent-uploaded-news {
     flex: 1;
     margin-left: 10%;
-    color: rgb(0, 140, 255);
+    color: #8C55AA;
 }
 
 .create-news-button-area {
@@ -45,7 +45,7 @@
 .create-news-button {
     flex: 1;
     align-self: center;
-    background: #76B3FA;
+    background: linear-gradient(to right, #9C27B0, #E040FB);
     border-radius: 100px;
     padding: 20px 60px;
     color: #fff;
@@ -64,7 +64,7 @@
     flex: 1;
     -webkit-animation: active 1200ms ease 1 alternate;
     animation: active 1200ms ease 1 alternate; 
-    background: #5F9BE0;
+    background: #8312c0;
   }
 
   
