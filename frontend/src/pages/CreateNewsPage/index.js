@@ -17,12 +17,16 @@ class CreateNewsPage extends React.Component {
             title: "",
             content: "",
             loading: false,
+            uploadedFile: null,
+            newsCreated: false,
         }
 
         this.handleTitleChange = this.handleTitleChange.bind(this);
         this.handleFileChange = this.handleFileChange.bind(this);
         this.handleContentChange = this.handleContentChange.bind(this);
         this.uploadFile = this.uploadFile.bind(this);
+        this.handleSubmit = this.handleSubmit.bind(this);
+        this.isDataValid = this.isDataValid.bind(this);
 
     }
 
@@ -68,7 +72,7 @@ class CreateNewsPage extends React.Component {
                 if (res.status > 499) {
                     alert('Something went wrong');
                     this.setState({ loading: false });
-                    return;
+                    return {};
                 }
                 else if (res.status > 299) {
                     ok = false;
@@ -90,7 +94,12 @@ class CreateNewsPage extends React.Component {
                     for (let key in data) {
                         message += `\n${data[key]}`;
                     }
-                    alert(message);
+                    if (message) {
+                        alert(message);
+                    }
+                }
+                else {
+                    this.setState({ uploadedFile: data })
                 }
                 this.setState({ loading: false });
             });
@@ -103,17 +112,88 @@ class CreateNewsPage extends React.Component {
     }
 
 
+    isDataValid() {
+        const title = this.state.title;
+        const content = this.state.content;
+        const uploadedFile = this.state.uploadedFile;
+        if (title && content && uploadedFile) {
+            return true;
+        }
+        return false;
+    }
+
+    handleSubmit(event) {
+        event.preventDefault();
+        const isDataValid = this.isDataValid();
+        if (!isDataValid) {
+            alert('Fill the form properly');
+            return;
+        }
+
+        const token = Cookies.get('csrftoken');
+        const newsRequest = new Request(
+            '/api/news/',
+            {
+                method: 'POST',
+                headers: {
+                    'X-CSRFToken': token,
+                    'Content-Type': 'application/json',
+                },
+                body: JSON.stringify({
+                    title: this.state.title,
+                    content: this.state.content,
+                    photo: this.state.uploadedFile,
+                }),
+            }
+        );
+
+
+        let ok;
+        fetch(newsRequest)
+            .then(res => {
+                if (res.status > 499) {
+                    alert('Something went wrong');
+                    this.setState({ loading: false });
+                    return {};
+                }
+                else if (res.status > 299) {
+                    ok = false;
+                }
+                else {
+                    ok = true;
+                }
+                return res.json();
+            })
+            .then(data => {
+                if (!ok) {
+                    let message = '';
+                    for (let key in data) {
+                        message += `\n${data[key]}`;
+                    }
+                    if (message) {
+                        alert(message);
+                    }
+                    this.setState({ loading: false });
+                }
+                else {
+                    this.setState({ loading: false });
+                    this.setState({ newsCreated: true });
+                }
+            });
+    }
+
 
     render() {
         const { user } = this.context;
 
         if (!user) return <Redirect to="/login" />
+        if (this.state.newsCreated) return <Redirect to="/" exact />
 
         return (
             <div className="create-news-page">
                 <div className="create-news-form-box">
                     <p className="create-news-form-title" align="center">Create news</p>
-                    <form className="create-news-form">
+                    <form className="create-news-form" method="POST">
                         <input
                             className="create-news-input"
                             type="text"
@@ -124,14 +204,20 @@ class CreateNewsPage extends React.Component {
                             className="create-news-content"
                             maxLength="1000"
                             rows="15"
+                            placeholder="Content"
                             onChange={this.handleContentChange}
                         />
                         <div className="upload-btn-wrapper">
                             <button className="btn">{this.state.fileName}</button>
                             <input type="file" name="myfile" onChange={this.handleFileChange} />
                         </div>
-                        {/* <button className="submit" align="center">Create news</button> */}
                         {this.state.loading && <Loader />}
+                        <button
+                            className="create-news-submit"
+                            onClick={this.handleSubmit}
+                        >
+                            Create news
+                        </button>
                     </form>
                 </div>
             </div>

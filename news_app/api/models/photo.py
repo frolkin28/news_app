@@ -11,3 +11,5 @@ class Photo(models.Model):
     )
     name = models.CharField(max_length=120)
     path = models.CharField(max_length=255)
+    url = models.CharField(max_length=120, null=True)
+    filename = models.CharField(max_length=60, null=True)

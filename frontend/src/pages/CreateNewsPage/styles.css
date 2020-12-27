@@ -37,19 +37,16 @@ form.create-news-form {
     border-radius: 20px;
     outline: none;
     box-sizing: border-box;
-    border: 2px solid rgba(0, 0, 0, 0.02);
+    border: 2px solid rgba(0, 0, 0, 0.06);
     margin-bottom: 50px;
     text-align: center;
     margin-bottom: 27px;
     font-family: 'Ubuntu', sans-serif;
 }
 
-.un:focus, .pass:focus {
-    border: 2px solid rgba(0, 0, 0, 0.18) !important;
-    
-}
 
-.submit {
+.create-news-submit {
+    flex: 1;
     cursor: pointer;
     border-radius: 5em;
     color: #fff;
@@ -60,7 +57,8 @@ form.create-news-form {
     padding-bottom: 10px;
     padding-top: 10px;
     font-family: 'Ubuntu', sans-serif;
-    margin-left: 35%;
+    /* margin-left: 35%; */
+    margin-bottom: 50px;
     font-size: 13px;
     box-shadow: 0 0 20px 1px rgba(0, 0, 0, 0.04);
 }
@@ -106,7 +104,7 @@ form.create-news-form {
     border-radius: 20px;
     outline: none;
     box-sizing: border-box;
-    border: 2px solid rgba(0, 0, 0, 0.02);
+    border: 2px solid rgba(0, 0, 0, 0.06);
     margin-bottom: 50px;
     font-family: 'Ubuntu', sans-serif;
 }

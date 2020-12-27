@@ -6,6 +6,9 @@ from django.core.exceptions import ValidationError
 from api.models import News, Photo, User
 
 
+NEWS_PER_PAGE = 5
+
+
 def create_news(
     title: str,
     content: str,
@@ -18,6 +21,7 @@ def create_news(
         content=content,
         date_created=date_created,
         author=author,
+        photo=photo
     )
     return news
 
@@ -29,6 +33,11 @@ def get_news_by_uuid(uuid: str) -> t.Optional[News]:
         news = News.objects.filter(uuid=uuid).first()
     except ValidationError:
         return None
+    return news
+
+
+def get_list_with_pagination(page: t.Optional[int] = None) -> t.List[News]:
+    news = News.objects.order_by('-date_created')[:NEWS_PER_PAGE]
     return news
 
 

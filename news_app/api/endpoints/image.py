@@ -4,6 +4,7 @@ from rest_framework import authentication
 from rest_framework import response
 
 from api.services import images_service
+from api.util.serializers import PhotoSerializer
 
 FILE_KEY = 'image'
 
@@ -22,5 +23,5 @@ class ImageView(views.APIView):
                 {'message': 'Invalid extension'},
                 status=400,
             )
-        images_service.upload(file)
-        return response.Response({}, status=201)
+        image = images_service.upload(file)
+        return response.Response(PhotoSerializer(image).data, status=201)

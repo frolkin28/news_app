@@ -34,9 +34,11 @@ class UserSerializer(serializers.ModelSerializer):
 
 
 class PhotoSerializer(serializers.ModelSerializer):
+    uuid = serializers.CharField(required=True)
+
     class Meta:
         model = Photo
-        fields = ('uuid', 'name', 'path')
+        fields = ('uuid', 'name', 'url')
 
 
 class TagSerializer(serializers.ModelSerializer):

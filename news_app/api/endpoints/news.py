@@ -5,7 +5,7 @@ from rest_framework import authentication
 from rest_framework import status
 
 from api.util.serializers import NewsSerializer, UpdateNewsSerializer
-from api.services import news_service
+from api.services import news_service, images_service
 
 
 class NewsView(views.APIView):
@@ -23,10 +23,13 @@ class NewsView(views.APIView):
         news_serializer = NewsSerializer(data=request.data)
         news_serializer.is_valid(raise_exception=True)
         news_data = news_serializer.validated_data
+        photo_uuid = news_data['photo']['uuid']
+        photo = images_service.get_image_by_uuid(photo_uuid)
         news = news_service.create_news(
             title=news_data['title'],
             content=news_data['content'],
-            author=request.user
+            author=request.user,
+            photo=photo
         )
 
         return response.Response(
@@ -50,3 +53,15 @@ class NewsView(views.APIView):
             return response.Response(status=status.HTTP_404_NOT_FOUND)
 
         return response.Response(status=status.HTTP_204_NO_CONTENT)
+
+
+class NewsListView(views.APIView):
+    permission_classes = (permissions.IsAuthenticatedOrReadOnly,)
+    authentication_classes = (authentication.SessionAuthentication,)
+
+    def get(self, request, uuid):
+        news = news_service.get_list_with_pagination()
+        if not news:
+            return response.Response(status=status.HTTP_404_NOT_FOUND)
+        else:
+            return response.Response(NewsSerializer(news).data)

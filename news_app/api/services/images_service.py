@@ -1,10 +1,13 @@
 import re
+import uuid
 
 from django.conf import settings
 from django.core.files.storage import FileSystemStorage
+from django.core.exceptions import ValidationError
 from werkzeug.utils import secure_filename
 
 from api.models.photo import Photo
+from api.util.urls import generate_image_url
 
 
 ALLOWED_EXTENSIONS = ['jpg', 'jpeg', 'png', 'webp']
@@ -38,21 +41,32 @@ def upload(file):
 
     fs = FileSystemStorage(location=path)
 
-    photo = Photo(name=filename)
-    photo.save()
-
-    uuid = str(photo.uuid)
     name, ext = _validate_filename(filename)
-    unique_filename = generate_unique_name(name, ext, uuid)
+    unique_filename = generate_unique_name(name, ext)
 
     fs.save(unique_filename, file)
 
-    photo.path = str(path / unique_filename)
+    path = str(path / unique_filename)
+    url = generate_image_url(unique_filename)
+    photo = Photo(name=filename, path=path, url=url, filename=unique_filename)
     photo.save()
 
+    return photo
 
-def generate_unique_name(name: str, ext: str, uuid: str):
+
+def generate_unique_name(name: str, ext: str) -> str:
+    file_uuid = str(uuid.uuid4())
     if len(name) > NAME_PART_LENGTH:
         name = name[:NAME_PART_LENGTH]
-    filename = '{}-{}.{}'.format(name, uuid[:UUID_PART_LENGTH], ext)
+    filename = '{}-{}.{}'.format(name, file_uuid[:UUID_PART_LENGTH], ext)
     return filename
+
+
+def get_image_by_uuid(uuid: str) -> Photo:
+    if not uuid:
+        return None
+    try:
+        photo = Photo.objects.filter(uuid=uuid).first()
+    except ValidationError:
+        return None
+    return photo
