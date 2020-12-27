@@ -50,7 +50,7 @@ class App extends React.Component {
                             <Route path="/" exact component={NewsArea} />
                             <Route path="/register" component={Register} />
                             <Route path="/login" component={Login} />
-                            <Route path="/news" exact component={NewsPage} />
+                            <Route path="/news/:uuid" exact component={NewsPage} />
                             <Route path="/account" component={Account} />
                             <Route path="/news/create" component={CreateNewsPage} />
                         </Switch>

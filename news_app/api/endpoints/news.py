@@ -12,12 +12,17 @@ class NewsView(views.APIView):
     permission_classes = (permissions.IsAuthenticatedOrReadOnly,)
     authentication_classes = (authentication.SessionAuthentication,)
 
-    def get(self, request, uuid):
-        news = news_service.get_news_by_uuid(uuid)
-        if not news:
-            return response.Response(status=status.HTTP_404_NOT_FOUND)
+    def get(self, request, uuid=None):
+        if uuid:
+            news = news_service.get_news_by_uuid(uuid)
+            if not news:
+                return response.Response(status=status.HTTP_404_NOT_FOUND)
+            content = NewsSerializer(news).data
         else:
-            return response.Response(NewsSerializer(news).data)
+            news = news_service.get_list_with_pagination()
+            content = NewsSerializer(news, many=True).data
+
+        return response.Response(content)
 
     def post(self, request):
         news_serializer = NewsSerializer(data=request.data)
@@ -53,15 +58,3 @@ class NewsView(views.APIView):
             return response.Response(status=status.HTTP_404_NOT_FOUND)
 
         return response.Response(status=status.HTTP_204_NO_CONTENT)
-
-
-class NewsListView(views.APIView):
-    permission_classes = (permissions.IsAuthenticatedOrReadOnly,)
-    authentication_classes = (authentication.SessionAuthentication,)
-
-    def get(self, request, uuid):
-        news = news_service.get_list_with_pagination()
-        if not news:
-            return response.Response(status=status.HTTP_404_NOT_FOUND)
-        else:
-            return response.Response(NewsSerializer(news).data)
