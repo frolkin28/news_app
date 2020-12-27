@@ -3,7 +3,7 @@ import { NavLink } from 'react-router-dom';
 import './styles.css';
 
 
-// const CONTENT_LENGTH = 200;
+const CONTENT_LENGTH = 200;
 
 
 class NewsItem extends React.Component {
@@ -16,7 +16,7 @@ class NewsItem extends React.Component {
                     <img src={news.photo.url} className="news-image" alt="News" />
                     <h1 className="news-title">{news.title}</h1>
                     <hr className="line"></hr>
-                    <p className="news-content">{news.content}</p>
+                    <p className="news-content">{news.content.slice(0, CONTENT_LENGTH)}...</p>
 
                 </div>
             </NavLink>

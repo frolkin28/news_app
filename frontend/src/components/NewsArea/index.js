@@ -35,6 +35,7 @@ class NewsArea extends React.Component {
                         <NewsItem key={news.uuid} news={news} />
                     )
                 )}
+                <div className="pagination-block"></div>
             </div>
         );
     }

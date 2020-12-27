@@ -45,9 +45,9 @@ class NewsPage extends React.Component {
                     <img src={this.state.news.photo.url} className="news-page-image" alt="News" />
                 </div>
                 <div className="news-page-author-block">
-                    <h5>
+                    <h4>
                         Author: {`${this.state.news.author.first_name} ${this.state.news.author.last_name}`}
-                    </h5>
+                    </h4>
                 </div>
                 <div className="news-page-content-block">
                     <p>{this.state.news.content}</p>

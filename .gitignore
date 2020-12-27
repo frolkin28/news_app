@@ -3,3 +3,4 @@ __pycache__/
 *.pyc
 .env
 setup_ex
+news_app/static/img

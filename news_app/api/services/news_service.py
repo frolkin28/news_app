@@ -1,4 +1,5 @@
 import datetime
+import math
 import typing as t
 
 from django.core.exceptions import ValidationError
@@ -70,3 +71,8 @@ def delete_news(uuid: str, user: User) -> int:
     res = News.objects.filter(uuid=uuid, author_id=user.uuid).delete()
     deleted_objects_count = res[0]
     return deleted_objects_count
+
+
+def get_news_pages_amount() -> int:
+    news_amount = News.objects.count()
+    return math.ceil(news_amount / NEWS_PER_PAGE)

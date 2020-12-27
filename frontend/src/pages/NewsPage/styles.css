@@ -12,6 +12,7 @@
 
 .news-page-title h1 {
     color:  #9C27B0;
+    font-family: 'Ubuntu', sans-serif;
 }
 
 .news-page-image-block {
@@ -30,7 +31,9 @@
 .news-page-author-block {
     flex: 1;
     display: flex;
-    justify-content: center;
+    justify-content: flex-end;
+    margin: 0px 25%;
+    font-family: 'Ubuntu', sans-serif;
 }
 
 .news-page-content-block {
@@ -43,4 +46,6 @@
 
 .news-page-content-block {
     text-align: center;
+    margin: 0px 20% 50px 20%;
+    font-family: 'Ubuntu', sans-serif;
 }

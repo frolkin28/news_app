@@ -34,7 +34,7 @@ class Account extends React.Component {
                     </div>
                 </div>
                 <div className="create-news-button-area">
-                    <NavLink to="/news/create" className="create-news-button">Create news</NavLink>
+                    <NavLink to="/create-news" className="create-news-button">Create news</NavLink>
                 </div>
             </div>
         )

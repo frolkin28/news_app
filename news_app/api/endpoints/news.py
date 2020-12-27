@@ -58,3 +58,12 @@ class NewsView(views.APIView):
             return response.Response(status=status.HTTP_404_NOT_FOUND)
 
         return response.Response(status=status.HTTP_204_NO_CONTENT)
+
+
+class PageView(views.APIView):
+    permission_classes = (permissions.IsAuthenticatedOrReadOnly,)
+    authentication_classes = (authentication.SessionAuthentication,)
+
+    def get(self, request):
+        pages = news_service.get_news_pages_amount()
+        return response.Response({'amount': pages})
