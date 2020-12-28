@@ -1,0 +1,13 @@
+.tag-form-title {
+    color: #8C55AA;
+    font-family: 'Ubuntu', sans-serif;
+}
+
+.tag-checkbox-item {
+    text-decoration: none;
+}
+
+.tag-list {
+    list-style: none;
+    padding-left: 0px;
+}

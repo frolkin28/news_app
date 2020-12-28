@@ -2,6 +2,7 @@ import { NavLink } from 'react-router-dom';
 import React from 'react';
 import Cookies from 'js-cookie';
 import UserContext from '../../util/context';
+import Dropdown from '../Dropdown';
 import './styles.css';
 
 class Header extends React.Component {
@@ -74,6 +75,7 @@ class Header extends React.Component {
                         </NavLink>
                     </h1>
                 </div>
+                <Dropdown />
                 {navComponent}
             </header >
         );

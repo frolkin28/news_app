@@ -5,7 +5,9 @@ from rest_framework import authentication
 from rest_framework import status
 
 from api.util.serializers import NewsSerializer, UpdateNewsSerializer
-from api.services import news_service, images_service
+from api.services import (
+    news_service, images_service, tag_service, rubric_service
+)
 
 
 class NewsView(views.APIView):
@@ -25,16 +27,29 @@ class NewsView(views.APIView):
         return response.Response(content)
 
     def post(self, request):
+        rubrics = request.data.pop('pubrics', [])
+        tags = request.data.pop('tags', [])
+
+        found_rubrics = rubric_service.get_rubrics_by_ids(
+            [r['uuid'] for r in rubrics]
+        )
+        found_tags = tag_service.get_tags_by_ids(
+            [t['uuid'] for t in tags]
+        )
+
         news_serializer = NewsSerializer(data=request.data)
         news_serializer.is_valid(raise_exception=True)
         news_data = news_serializer.validated_data
         photo_uuid = news_data['photo']['uuid']
         photo = images_service.get_image_by_uuid(photo_uuid)
+
         news = news_service.create_news(
             title=news_data['title'],
             content=news_data['content'],
             author=request.user,
-            photo=photo
+            rubrics=found_rubrics,
+            tags=found_tags,
+            photo=photo,
         )
 
         return response.Response(

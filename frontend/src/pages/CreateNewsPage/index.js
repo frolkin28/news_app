@@ -2,6 +2,8 @@ import React from 'react';
 import { Redirect } from "react-router-dom";
 import UserContext from '../../util/context';
 import Loader from '../../components/Loader';
+import RubricForm from '../../components/RubricForm';
+import TagForm from '../../components/TagForm';
 import Cookies from 'js-cookie';
 import './styles.css';
 
@@ -19,6 +21,8 @@ class CreateNewsPage extends React.Component {
             loading: false,
             uploadedFile: null,
             newsCreated: false,
+            selectedRubrics: [],
+            selectedTags: [],
         }
 
         this.handleTitleChange = this.handleTitleChange.bind(this);
@@ -28,6 +32,36 @@ class CreateNewsPage extends React.Component {
         this.handleSubmit = this.handleSubmit.bind(this);
         this.isDataValid = this.isDataValid.bind(this);
 
+    }
+
+    addRubric = (rubric) => {
+        this.setState((prevState) => {
+            return { selectedRubrics: [...prevState.selectedRubrics, rubric] };
+        })
+    }
+
+    removeRubric = (rubric) => {
+        this.setState((prevState) => {
+            const newRubrics = prevState.selectedRubrics.filter(
+                item => item.uuid !== rubric.uuid
+            );
+            return { selectedRubrics: newRubrics };
+        })
+    }
+
+    addTag = (tag) => {
+        this.setState((prevState) => {
+            return { selectedTags: [...prevState.selectedTags, tag] };
+        })
+    }
+
+    removeTag = (tag) => {
+        this.setState((prevState) => {
+            const newTags = prevState.selectedTags.filter(
+                item => item.uuid !== tag.uuid
+            );
+            return { selectedTags: newTags };
+        })
     }
 
     handleTitleChange(event) {
@@ -143,6 +177,8 @@ class CreateNewsPage extends React.Component {
                     title: this.state.title,
                     content: this.state.content,
                     photo: this.state.uploadedFile,
+                    pubrics: this.state.selectedRubrics,
+                    tags: this.state.selectedTags,
                 }),
             }
         );
@@ -212,6 +248,10 @@ class CreateNewsPage extends React.Component {
                             <input type="file" name="myfile" onChange={this.handleFileChange} />
                         </div>
                         {this.state.loading && <Loader />}
+                        <div className="rubric-tag-block">
+                            <RubricForm addRubric={this.addRubric} removeRubric={this.removeRubric} />
+                            <TagForm addTag={this.addTag} removeTag={this.removeTag} />
+                        </div>
                         <button
                             className="create-news-submit"
                             onClick={this.handleSubmit}

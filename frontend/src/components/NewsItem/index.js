@@ -11,15 +11,17 @@ class NewsItem extends React.Component {
         const { news } = this.props;
 
         return (
-            <NavLink to={`/news/${news.uuid}`} exact className="news-item-link" activeClassName="news-item-link">
-                <div className="news-item">
-                    <img src={news.photo.url} className="news-image" alt="News" />
+            <div className="news-item">
+                <img src={news.photo.url} className="news-image" alt="News" />
+                <NavLink to={`/news/${news.uuid}`} exact className="news-item-link" activeClassName="news-item-link">
                     <h1 className="news-title">{news.title}</h1>
-                    <hr className="line"></hr>
-                    <p className="news-content">{news.content.slice(0, CONTENT_LENGTH)}...</p>
+                </NavLink>
+                <hr className="line"></hr>
+                <p className="news-content">{news.content.slice(0, CONTENT_LENGTH)}...</p>
 
-                </div>
-            </NavLink>
+
+            </div >
+
         )
     }
 }

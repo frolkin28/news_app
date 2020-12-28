@@ -14,6 +14,8 @@ def create_news(
     title: str,
     content: str,
     author: User,
+    rubrics: t.List[str] = [],
+    tags: t.List[str] = [],
     date_created: datetime.datetime = None,
     photo: t.Optional[Photo] = None,
 ) -> News:
@@ -24,6 +26,14 @@ def create_news(
         author=author,
         photo=photo
     )
+    if rubrics:
+        news.rubrics.add(*rubrics)
+    if tags:
+        news.tags.add(*tags)
+
+    if rubrics or tags:
+        news.save()
+
     return news
 
 

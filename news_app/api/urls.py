@@ -6,6 +6,8 @@ from api.endpoints.auth import LogoutView
 from api.endpoints.user import UserView
 from api.endpoints.news import NewsView
 from api.endpoints.image import ImageView
+from api.endpoints.rubric import RubricView
+from api.endpoints.tag import TagView
 from api.views import index
 
 
@@ -19,7 +21,9 @@ apipatterns = [
     path('user/<uuid>/', UserView.as_view(), name='user'),
     path('news/', NewsView.as_view(), name='news_list'),
     path('news/<uuid>', NewsView.as_view(), name='news_by_uuid'),
-    path('image/', ImageView.as_view(), name='image')
+    path('image/', ImageView.as_view(), name='image'),
+    path('rubric/', RubricView.as_view(), name='rubric_list'),
+    path('tag/', TagView.as_view(), name='tag_list'),
 ]
 
 

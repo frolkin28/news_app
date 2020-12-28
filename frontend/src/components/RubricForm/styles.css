@@ -1,0 +1,13 @@
+.rubric-form-title {
+    color: #8C55AA;
+    font-family: 'Ubuntu', sans-serif;
+}
+
+.rubric-checkbox-item {
+    text-decoration: none;
+}
+
+.rubric-list {
+    list-style: none;
+    padding-left: 0px;
+}

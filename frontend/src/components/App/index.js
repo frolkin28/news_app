@@ -8,6 +8,7 @@ import Register from '../Register';
 import Login from '../Login';
 import NewsPage from '../../pages/NewsPage';
 import CreateNewsPage from '../../pages/CreateNewsPage';
+import RubricPage from '../../pages/RubricPage';
 import Account from '../Account';
 
 
@@ -53,6 +54,7 @@ class App extends React.Component {
                             <Route path="/news/:uuid" exact component={NewsPage} />
                             <Route path="/account" component={Account} />
                             <Route path="/create-news" component={CreateNewsPage} />
+                            <Route path="/rubric/:uuid" component={RubricPage} />
                         </Switch>
                     </BrowserRouter>
                     <Footer />
