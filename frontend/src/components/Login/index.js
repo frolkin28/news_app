@@ -78,7 +78,7 @@ class Login extends React.Component {
 
         }
         else {
-            console.log("Invalid data");
+            alert("Invalid data");
         }
     }
 

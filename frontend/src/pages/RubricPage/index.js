@@ -16,7 +16,6 @@ export default class RubricPage extends React.Component {
     }
 
     componentDidMount() {
-        console.log('mount');
         this.fetchRubric();
         this.fetchNews();
     }
