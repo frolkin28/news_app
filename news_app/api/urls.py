@@ -18,11 +18,12 @@ authpatterns = [
 ]
 
 apipatterns = [
-    path('user/<uuid>/', UserView.as_view(), name='user'),
+    path('user/<uuid>', UserView.as_view(), name='user'),
     path('news/', NewsView.as_view(), name='news_list'),
     path('news/<uuid>', NewsView.as_view(), name='news_by_uuid'),
     path('image/', ImageView.as_view(), name='image'),
     path('rubric/', RubricView.as_view(), name='rubric_list'),
+    path('rubric/<uuid>', RubricView.as_view(), name='rubric_by_uuid'),
     path('tag/', TagView.as_view(), name='tag_list'),
 ]
 

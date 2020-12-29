@@ -86,3 +86,9 @@ def delete_news(uuid: str, user: User) -> int:
 def get_news_pages_amount() -> int:
     news_amount = News.objects.count()
     return math.ceil(news_amount / NEWS_PER_PAGE)
+
+
+def get_news_by_rubric_uuid(uuid: str) -> t.List[News]:
+    if not uuid:
+        return []
+    return News.objects.filter(rubrics__uuid=uuid).all()

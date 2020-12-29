@@ -1,0 +1,19 @@
+.rubric-page {
+    display: flex;
+    flex-direction: column;
+}
+
+.rubric-block {
+    flex: 1;
+}
+
+.rubric-title {
+    display: flex;
+    justify-content: center;
+    color:  #9C27B0;
+}
+
+.rubric-content {
+    display: flex;
+    justify-content: center;
+}

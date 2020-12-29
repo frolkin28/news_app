@@ -223,7 +223,7 @@ class CreateNewsPage extends React.Component {
         const { user } = this.context;
 
         if (!user) return <Redirect to="/login" />
-        if (this.state.newsCreated) return <Redirect to="/" exact />
+        if (this.state.newsCreated || (user.role !== 2)) return <Redirect to="/" exact />
 
         return (
             <div className="create-news-page">

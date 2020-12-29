@@ -15,14 +15,19 @@ class NewsView(views.APIView):
     authentication_classes = (authentication.SessionAuthentication,)
 
     def get(self, request, uuid=None):
-        if uuid:
-            news = news_service.get_news_by_uuid(uuid)
-            if not news:
-                return response.Response(status=status.HTTP_404_NOT_FOUND)
-            content = NewsSerializer(news).data
-        else:
-            news = news_service.get_list_with_pagination()
+        rubric_uuid = request.query_params.get('rubric_id', None)
+        if rubric_uuid:
+            news = news_service.get_news_by_rubric_uuid(rubric_uuid)
             content = NewsSerializer(news, many=True).data
+        else:
+            if uuid:
+                news = news_service.get_news_by_uuid(uuid)
+                if not news:
+                    return response.Response(status=status.HTTP_404_NOT_FOUND)
+                content = NewsSerializer(news).data
+            else:
+                news = news_service.get_list_with_pagination()
+                content = NewsSerializer(news, many=True).data
 
         return response.Response(content)
 

@@ -1,7 +1,8 @@
 import React from 'react';
-import './styles.css';
+import { NavLink } from 'react-router-dom';
 import Cookies from 'js-cookie';
 
+import './styles.css';
 
 
 class NewsPage extends React.Component {
@@ -41,8 +42,37 @@ class NewsPage extends React.Component {
                 <div className="news-page-title">
                     <h1>{this.state.news.title}</h1>
                 </div>
+                <div className="news-rubrics-block">
+                    <h3>Rubrics:</h3>
+                    <ul className="link-list">
+                        {
+                            this.state.news.rubrics.map(
+                                rubric => (
+                                    <li key={rubric.uuid}>
+                                        <NavLink to={`/rubric/${rubric.uuid}`}>
+                                            {rubric.title}
+                                        </NavLink>
+                                    </li>
+                                )
+                            )
+                        }
+                    </ul>
+                </div>
                 <div className="news-page-image-block">
                     <img src={this.state.news.photo.url} className="news-page-image" alt="News" />
+                </div>
+                <div className="news-tags-block">
+                    <ul className="link-list">
+                        {
+                            this.state.news.tags.map(
+                                tag => (
+                                    <li key={tag.uuid}>
+                                        <span className="label info">{tag.title}</span>
+                                    </li>
+                                )
+                            )
+                        }
+                    </ul>
                 </div>
                 <div className="news-page-author-block">
                     <h4>

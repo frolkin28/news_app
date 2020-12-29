@@ -30,12 +30,14 @@ class Account extends React.Component {
                         </h3>
                     </div>
                     <div className="account-recent-uploaded-news">
-                        <h1>Recent uploaded news</h1>
                     </div>
                 </div>
-                <div className="create-news-button-area">
-                    <NavLink to="/create-news" className="create-news-button">Create news</NavLink>
-                </div>
+                {
+                    user.role === 2 &&
+                    <div className="create-news-button-area">
+                        <NavLink to="/create-news" className="create-news-button">Create news</NavLink>
+                    </div>
+                }
             </div>
         )
     }

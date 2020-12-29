@@ -1,13 +1,11 @@
 import React from 'react';
-import { Redirect, NavLink } from 'react-router-dom';
+import { NavLink } from 'react-router-dom';
 import './styles.css';
 
 
 export default class Dropdown extends React.Component {
     state = {
         rubrics: [],
-        isRedirect: false,
-        redirectTo: null,
     }
 
     componentDidMount() {
@@ -37,41 +35,18 @@ export default class Dropdown extends React.Component {
             });
     }
 
-    handleChange(r) {
-        this.setState({
-            isRedirect: true,
-            redirectTo: `/rubric/${r.uuid}`
-        })
-    }
-
     render() {
-        if (this.state.isRedirect) {
-            const url = this.state.redirectTo;
-            this.setState({
-                isRedirect: false,
-                redirectTo: null,
-            })
-            return <Redirect to={url} />
-        }
-
         return (
-            <div className="container">
-                <div className="dropdown">
-                    <select name="one" className="dropdown-select">
-                        <option>Rubrics</option>
-                        {
-                            this.state.rubrics.map(
-                                (rubric) => {
-                                    return (
-                                        <option key={rubric.uuid} onClick={ () => this.handleChange(rubric)}>
-                                            {rubric.title}
-                                        </option>
-                                    )
-                                })
-                        }
-                    </select>
+            <div className="dropdown">
+                <button className="dropbtn">Rubrics</button>
+                <div className="dropdown-content">
+                    {
+                        this.state.rubrics.map(
+                            (rubric) => <NavLink key={rubric.uuid} to={`/rubric/${rubric.uuid}`}>{rubric.title}</NavLink>
+                        )
+                    }
                 </div>
-            </div>
+            </div >
         )
     }
 }

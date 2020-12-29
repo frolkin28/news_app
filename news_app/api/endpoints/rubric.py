@@ -11,6 +11,11 @@ class RubricView(views.APIView):
     permission_classes = (permissions.IsAuthenticatedOrReadOnly,)
     authentication_classes = (authentication.SessionAuthentication,)
 
-    def get(self, request):
-        rubrics = rubric_service.get_all_rubrics()
-        return response.Response(RubricSerializer(rubrics, many=True).data)
+    def get(self, request, uuid=None):
+        if uuid:
+            rubric = rubric_service.get_rubric_by_uuid(uuid)
+            content = RubricSerializer(rubric).data
+        else:
+            rubrics = rubric_service.get_all_rubrics()
+            content = RubricSerializer(rubrics, many=True).data
+        return response.Response(content)

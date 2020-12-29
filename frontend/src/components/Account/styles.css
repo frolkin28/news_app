@@ -2,6 +2,7 @@
     display: flex;
     padding: 10px;
     flex-direction: row;
+    margin-bottom: 250px;
 }
 
 .account-area {

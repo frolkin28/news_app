@@ -41,7 +41,7 @@ class App extends React.Component {
     render() {
         const { user } = this.state;
         const { setUser } = this;
-    
+
         return (
             <UserContext.Provider value={{ user, setUser }}>
                 <div className="App">
@@ -54,7 +54,7 @@ class App extends React.Component {
                             <Route path="/news/:uuid" exact component={NewsPage} />
                             <Route path="/account" component={Account} />
                             <Route path="/create-news" component={CreateNewsPage} />
-                            <Route path="/rubric/:uuid" component={RubricPage} />
+                            <Route path="/rubric/:uuid" component={RubricPage} key={window.location.pathname} />
                         </Switch>
                     </BrowserRouter>
                     <Footer />
